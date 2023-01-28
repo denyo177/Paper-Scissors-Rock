@@ -83,7 +83,7 @@ function game() {
 
     confirm("Wanna play Paper, Scissors, Rock?");
 
-    for  (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 5; i++) {
         // Abfrage Players Choice. Generieren Computer Choice
         playerSelection = getPlayerChoice();
         computerSelection = getComputerChoice();
@@ -104,8 +104,12 @@ function game() {
     // Nach 5 Runden, gebe Gewinner aus
     if (winsPlayer > winsComputer) {
         alert(`Game Over. Congratulation, You Won the game! \n [You: ${winsPlayer} - Computer: ${winsComputer}]`);
+        console.log(`Game Over. Congratulation, You Won the game! \n [You: ${winsPlayer} - Computer: ${winsComputer}]`);
     } else if (winsComputer > winsPlayer) {
         alert(`Game Over. Don't be sad, You Lost the Game :( ! \n [You: ${winsPlayer} - Computer: ${winsComputer}]`);
-    } else alert(`Game Over. Draw! \n [You: ${winsPlayer} - Computer: ${winsComputer}]`)
-
+        console.log(`Game Over. Don't be sad, You Lost the Game :( ! \n [You: ${winsPlayer} - Computer: ${winsComputer}]`);
+    } else { 
+        alert(`Game Over. Draw! \n [You: ${winsPlayer} - Computer: ${winsComputer}]`);
+        console.log(`Game Over. Draw! \n [You: ${winsPlayer} - Computer: ${winsComputer}]`);
+    }
 }
