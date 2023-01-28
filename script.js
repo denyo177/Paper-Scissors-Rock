@@ -10,6 +10,26 @@ function getComputerChoice() {
 
 }
 
+function getPlayerChoice() {
+
+    let validChoice = false;
+    let playerSelect = prompt("Enter your choice of 'Paper', 'Scissors' or 'Rock' : ");
+    playerSelect = capitalizeString(playerSelect);
+
+    if (playerSelect === "Paper" || playerSelect === "Scissors" || playerSelect === "Rock") {
+        validChoice = true;
+    } else validChoice = false;
+
+    while (!validChoice) {
+        playerSelect = prompt("Undefined Value! Please enter either 'Paper', 'Scissors' or 'Rock' : ");
+        playerSelect = capitalizeString(playerSelect);
+        if (playerSelect === "Paper" || playerSelect === "Scissors" || playerSelect === "Rock") {
+            validChoice = true;
+        } else validChoice = false;
+    }
+    return playerSelect;
+}
+
 function playRound(playerSelection, computerSelection) {
 
     // Compare player- and computer selection and define winner
@@ -59,11 +79,13 @@ function game() {
 
     let winsPlayer = 0;
     let winsComputer = 0;
+    let playerSelection = "";
+
+    confirm("Wanna play Paper, Scissors, Rock?");
 
     for  (let i = 0; i < 5; i++) {
         // Abfrage Players Choice. Generieren Computer Choice
-        let playerSelection = prompt("Enter your choice of 'Paper', 'Scissors' or 'Rock'! Round " + (i+1) + "/5");
-        playerSelection = capitalizeString(playerSelection);
+        playerSelection = getPlayerChoice();
         computerSelection = getComputerChoice();
 
         let resultRound = 0;
@@ -71,14 +93,19 @@ function game() {
         resultRound = playRound(playerSelection, computerSelection);
         if (resultRound === 1) {
             winsComputer += 1;
+            console.log("Round " + (i+1) + ` wins: Computer! \n You: ${winsPlayer} - Computer: ${winsComputer}`);
         } else if (resultRound === 2) {
             winsPlayer += 1;
+            console.log("Round " + (i+1) + ` wins: You! \n You: ${winsPlayer} - Computer: ${winsComputer}`);
+        } else if (resultRound === 0) {
+            console.log("Round " + (i+1) + ` Draw! \n You: ${winsPlayer} - Computer: ${winsComputer}`);
         }
     }
     // Nach 5 Runden, gebe Gewinner aus
     if (winsPlayer > winsComputer) {
-        alert(`Game Over. Congratulation, You Won the game! [You: ${winsPlayer} - Computer: ${winsComputer}]`);
+        alert(`Game Over. Congratulation, You Won the game! \n [You: ${winsPlayer} - Computer: ${winsComputer}]`);
     } else if (winsComputer > winsPlayer) {
-        alert(`Game Over. Don't be sad, You Lost the Game :( ! [You: ${winsPlayer} - Computer: ${winsComputer}]`);
-    } else alert(`Game Over. Draw! [You: ${winsPlayer} - Computer: ${winsComputer}]`)
+        alert(`Game Over. Don't be sad, You Lost the Game :( ! \n [You: ${winsPlayer} - Computer: ${winsComputer}]`);
+    } else alert(`Game Over. Draw! \n [You: ${winsPlayer} - Computer: ${winsComputer}]`)
+
 }
