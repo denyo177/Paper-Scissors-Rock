@@ -1,3 +1,7 @@
+
+
+
+
 function getComputerChoice() {
 
     // Generiere Zufall zwischen 1 -3 
@@ -10,26 +14,27 @@ function getComputerChoice() {
 
 }
 
-function getPlayerChoice() {
+// function getPlayerChoice() {
 
-    let validChoice = false;
-    let playerSelect = prompt("Enter your choice of 'Paper', 'Scissors' or 'Rock' : ");
-    playerSelect = capitalizeString(playerSelect);
+//     let validChoice = false;
+//     let playerSelect = prompt("Enter your choice of 'Paper', 'Scissors' or 'Rock' : ");
+//     playerSelect = capitalizeString(playerSelect);
 
-    if (playerSelect === "Paper" || playerSelect === "Scissors" || playerSelect === "Rock") {
-        validChoice = true;
-    } else validChoice = false;
+//     if (playerSelect === "Paper" || playerSelect === "Scissors" || playerSelect === "Rock") {
+//         validChoice = true;
+//     } else validChoice = false;
 
-    while (!validChoice) {
-        playerSelect = prompt("Undefined Value! Please enter either 'Paper', 'Scissors' or 'Rock' : ");
-        playerSelect = capitalizeString(playerSelect);
-        if (playerSelect === "Paper" || playerSelect === "Scissors" || playerSelect === "Rock") {
-            validChoice = true;
-        } else validChoice = false;
-    }
-    return playerSelect;
-}
+//     while (!validChoice) {
+//         playerSelect = prompt("Undefined Value! Please enter either 'Paper', 'Scissors' or 'Rock' : ");
+//         playerSelect = capitalizeString(playerSelect);
+//         if (playerSelect === "Paper" || playerSelect === "Scissors" || playerSelect === "Rock") {
+//             validChoice = true;
+//         } else validChoice = false;
+//     }
+//     return playerSelect;
+// }
 
+//returns 1 für Computer wins and 2 for Player win
 function playRound(playerSelection, computerSelection) {
 
     // Compare player- and computer selection and define winner
@@ -67,49 +72,52 @@ function playRound(playerSelection, computerSelection) {
 
 }
 
-function capitalizeString (word) {
-    return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
-}
+// function capitalizeString (word) {
+//     return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+// }
 
 // const playerSelection = "rock";
 // const computerSelection = getComputerChoice();
 // console.log(playRound(playerSelection, computerSelection));
 
-function game() {
+
 
     let winsPlayer = 0;
     let winsComputer = 0;
-    let playerSelection = "";
+    //let playerSelection = "";
+    
+    let resultRound = 0;
 
-    confirm("Wanna play Paper, Scissors, Rock?");
-
-    for (let i = 0; i < 5; i++) {
+    //for (let i = 0; i < 5; i++) {
         // Abfrage Players Choice. Generieren Computer Choice
-        playerSelection = getPlayerChoice();
-        computerSelection = getComputerChoice();
+        
+    const buttons = document.querySelectorAll('button');
 
-        let resultRound = 0;
-        // Spiele Runde, speicher Ergebnis je Spieler. 
-        resultRound = playRound(playerSelection, computerSelection);
-        if (resultRound === 1) {
-            winsComputer += 1;
-            console.log("Round " + (i+1) + ` wins: Computer! \n You: ${winsPlayer} - Computer: ${winsComputer}`);
-        } else if (resultRound === 2) {
-            winsPlayer += 1;
-            console.log("Round " + (i+1) + ` wins: You! \n You: ${winsPlayer} - Computer: ${winsComputer}`);
-        } else if (resultRound === 0) {
-            console.log("Round " + (i+1) + ` Draw! \n You: ${winsPlayer} - Computer: ${winsComputer}`);
-        }
-    }
-    // Nach 5 Runden, gebe Gewinner aus
-    if (winsPlayer > winsComputer) {
-        alert(`Game Over. Congratulation, You Won the game! \n [You: ${winsPlayer} - Computer: ${winsComputer}]`);
-        console.log(`Game Over. Congratulation, You Won the game! \n [You: ${winsPlayer} - Computer: ${winsComputer}]`);
-    } else if (winsComputer > winsPlayer) {
-        alert(`Game Over. Don't be sad, You Lost the Game :( ! \n [You: ${winsPlayer} - Computer: ${winsComputer}]`);
-        console.log(`Game Over. Don't be sad, You Lost the Game :( ! \n [You: ${winsPlayer} - Computer: ${winsComputer}]`);
-    } else { 
-        alert(`Game Over. Draw! \n [You: ${winsPlayer} - Computer: ${winsComputer}]`);
-        console.log(`Game Over. Draw! \n [You: ${winsPlayer} - Computer: ${winsComputer}]`);
-    }
-}
+    buttons.forEach( (button) => {
+        button.addEventListener('click', () => {
+            const computerSelection = getComputerChoice();
+            resultRound = playRound(button.id, computerSelection);
+            //Spiele Runde, speicher Ergebnis je Spieler. 
+            //resultRound = playRound(playerSelection, computerSelection);
+            if (resultRound === 1) {
+                winsComputer += 1;
+                console.log( ` wins: Computer! \n You: ${winsPlayer} - Computer: ${winsComputer}`);
+            } else if (resultRound === 2) {
+                winsPlayer += 1;
+                console.log( ` wins: You! \n You: ${winsPlayer} - Computer: ${winsComputer}`);
+            } else if (resultRound === 0) {
+                console.log( ` Draw! \n You: ${winsPlayer} - Computer: ${winsComputer}`);
+            }
+        });
+    });
+    // // Nach 5 Runden, gebe Gewinner aus
+    // if (winsPlayer > winsComputer) {
+    //     alert(`Game Over. Congratulation, You Won the game! \n [You: ${winsPlayer} - Computer: ${winsComputer}]`);
+    //     console.log(`Game Over. Congratulation, You Won the game! \n [You: ${winsPlayer} - Computer: ${winsComputer}]`);
+    // } else if (winsComputer > winsPlayer) {
+    //     alert(`Game Over. Don't be sad, You Lost the Game :( ! \n [You: ${winsPlayer} - Computer: ${winsComputer}]`);
+    //     console.log(`Game Over. Don't be sad, You Lost the Game :( ! \n [You: ${winsPlayer} - Computer: ${winsComputer}]`);
+    // } else { 
+    //     alert(`Game Over. Draw! \n [You: ${winsPlayer} - Computer: ${winsComputer}]`);
+    //     console.log(`Game Over. Draw! \n [You: ${winsPlayer} - Computer: ${winsComputer}]`);
+    // }
